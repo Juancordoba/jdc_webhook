@@ -8,7 +8,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
     let resp:any = {}
   const mode = req.nextUrl.searchParams.get("hub.mode");
   let token = req.nextUrl.searchParams.get("hub.verify_token");
-  let challenge = req.nextUrl.searchParams.get("hub.challenge");
+  let challenge = req.nextUrl.searchParams.get("hub.challenge") as string;
 
   // Check if a token and mode were sent
   if (mode && token) {
@@ -17,16 +17,17 @@ export async function GET(req: NextRequest, res: NextResponse) {
     if (mode === "subscribe" && token === VERIFY_TOKEN) {
       // Respond with 200 OK and challenge token from the request
       console.log("WEBHOOK_VERIFIED");
+      console.log(challenge)
       return NextResponse.json(challenge);
-      resp = challenge;
     } else {
       // Responds with '403 Forbidden' if verify tokens do not match
 
       resp = { error: 'Forbidden Error' , status: 403 };
+      return NextResponse.json(resp.strReplace('\"',""));
     }
   }
 
-  return NextResponse.json(resp);
+
 
 }
 
