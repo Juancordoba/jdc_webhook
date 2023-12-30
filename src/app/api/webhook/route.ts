@@ -8,11 +8,11 @@ export async function GET(req: NextRequest) {
 
   const mode = req.nextUrl.searchParams.get("hub.mode");
   let token = req.nextUrl.searchParams.get("hub.verify_token");
-  let challenge: string = req.nextUrl.searchParams.get("hub.challenge") as string;
+  let challenge = req.nextUrl.searchParams.get("hub.challenge");
 
   if (mode && token) {
     if (mode === "subscribe" && token === VERIFY_TOKEN) {
-      return Response.json(`${challenge}`);
+      return Response.json(challenge);
     } else {
       // Responds with '403 Forbidden' if verify tokens do not match
       return Response.json({ error: 'Forbidden Error'} , {status: 403 });
