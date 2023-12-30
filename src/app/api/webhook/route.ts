@@ -10,10 +10,10 @@ export async function GET(req: NextRequest, res:any) {
 
   const mode = req.nextUrl.searchParams.get('hub.mode');
   let token = req.nextUrl.searchParams.get('hub.verify_token');
-  let challenge = req.nextUrl.searchParams.get('hub.challenge');
+  let challenge:number = Number(req.nextUrl.searchParams.get('hub.challenge'));
 
 
-  if (mode && token) {
+    if (mode && token) {
     if (mode === "subscribe" && token === VERIFY_TOKEN) {
       return NextResponse.json(challenge);
     } 
