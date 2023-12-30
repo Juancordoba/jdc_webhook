@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
 
   if (mode && token) {
     if (mode === "subscribe" && token === VERIFY_TOKEN) {
-      return Response.json(challenge);
+      return Response.json(`${challenge}`);
     } else {
       // Responds with '403 Forbidden' if verify tokens do not match
       return Response.json({ error: 'Forbidden Error'} , {status: 403 });
