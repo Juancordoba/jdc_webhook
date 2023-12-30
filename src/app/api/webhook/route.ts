@@ -1,24 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
 const WHATSAPP_TOKEN = process.env.WHATSAPP_TOKEN
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN
 
-export async function GET(req: NextRequest) {
+export async function GET(req: NextApiRequest, res:NextApiResponse) {
 
-  const mode = req.nextUrl.searchParams.get("hub.mode");
-  let token = req.nextUrl.searchParams.get("hub.verify_token");
-  let challenge = req.nextUrl.searchParams.get("hub.challenge");
+  console.log(req)
 
-  if (mode && token) {
-    if (mode === "subscribe" && token === VERIFY_TOKEN) {
-      return Response.json(challenge);
-    } else {
-      // Responds with '403 Forbidden' if verify tokens do not match
-      return Response.json({ error: 'Forbidden Error'} , {status: 403 });
-    }
-  }
 
+  return NextResponse.json("mode")
 }
 
 /*
