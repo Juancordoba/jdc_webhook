@@ -5,11 +5,9 @@ const WHATSAPP_TOKEN = process.env.WHATSAPP_TOKEN
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN
 
 export async function GET(req: NextApiRequest, res:NextApiResponse) {
-
-  console.log(req)
-
-
-  return NextResponse.json("mode")
+  const resp = NextResponse.json("mode")
+  console.log(resp)
+  return resp
 }
 
 /*
